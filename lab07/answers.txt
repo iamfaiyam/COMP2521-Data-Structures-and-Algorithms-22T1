@@ -1,0 +1,33 @@
+
+Time Complexity analysis of lab07.
+Name: Faiyam Islam
+
+NOTE:
+- Your time complexities should be expressed in big-O notation and be in
+  terms of n, where n is the number of cells in the maze.
+
+============
+  solveBfs
+============
+
+- Worst case time complexity: O(V + E) i.e. O(n) since number of cells is always bigger than 
+number of edges and number of vertices due to walls.
+
+
+- Explanation: 
+(1) The program goes through edges meaning the time complexity is E (the number of edges). 
+(2) As the BFS algorithm is recursively called which is E - 1 as the while loop iterates. 
+(3) When initialising the matrices this takes V time hence the total time complexity becomes O(V + E). 
+
+============
+  solveDfs
+============
+
+- Worst case time complexity: O(V + E) i.e. O(n) since number of cells is always bigger than 
+number of edges and number of vertices due to walls.
+
+- Explanation: 
+(1) As Q is not empty, it goes through the edges every time once thus making time complexity
+E, which is the number of edge.s 
+(2) Similar to solveBfs, intialising the matrices takes V time therefore time complexity becomes O(V + E). 
+
