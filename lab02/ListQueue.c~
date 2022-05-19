@@ -1,0 +1,147 @@
+// Implementation of the Queue ADT using a linked list
+// by Faiyam Islam 
+// Description: A C program where items in a queue are stored in a linked list. 
+// The items are enqueued and dequeueed
+
+#include <assert.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "Queue.h"
+
+typedef struct node *Node;
+struct node {
+	Item item;
+	Node next;
+};
+
+struct queue {
+	Node head;
+	Node tail;
+	int  size;
+};
+
+// This piece of code allows to create a new node which 
+// then will be added to the queue in QueueEnqueue function.
+static Node new_node(Item it);
+
+/**
+ * Creates a new empty queue
+ */
+Queue QueueNew(void) {
+	Queue q = malloc(sizeof(*q));
+	if (q == NULL) {
+		fprintf(stderr, "couldn't allocate Queue\n");
+		exit(EXIT_FAILURE);
+	}
+
+	q->head = NULL;
+	q->tail = NULL;
+	q->size = 0;
+	return q;
+}
+
+/**
+ * Frees all resources associated with the given queue
+ */
+void QueueFree(Queue q) {
+	Node curr = q->head;
+	while (curr != NULL) {
+		Node temp = curr;
+		curr = curr->next;
+		free(temp);
+	}
+	free(q);
+}
+
+/**
+ * Adds an item to the end of the queue
+ */
+void QueueEnqueue(Queue q, Item it) {
+
+    // The node n is equal to new_node with int data called it.
+    Node n = new_node(it);
+    // The if condition here has the node pointing to the size and 
+    // if it is zero, q points to the head and is equal to the node n. 
+    if (q->size == 0) {
+        q->head = n; 
+    } else {
+        // Otherwise, points to the tail. 
+        q->tail->next = n; 
+    }
+    q->tail = n; 
+    q->size++; // When enqueueing, we need to make sure the size of the 
+               // queue is increased, in this case, by 1. 
+}
+
+static Node new_node(Item it) {
+    // First set n to equal to the memory of pointer n.
+    Node n = malloc(sizeof(*n)); 
+    // We cannot have the new node to be NULL, so need to 
+    // print out an error, so we use fprintf.
+    if (n == NULL) {
+        fprintf(stderr, "couldn't allocate Node\n");
+        exit(EXIT_FAILURE);
+    }
+    
+    n->item = it; 
+    n->next = NULL;
+    return n; 
+}   
+
+/**
+ * Removes an item from the front of the queue and returns it
+ * Assumes that the queue is not empty
+ */
+Item QueueDequeue(Queue q) {
+    assert(q->size > 0); 
+    
+    Node new_head = q->head->next;
+    Item it = q->head->item;
+    free(q->head);
+    
+    q->head = new_head; 
+    if (new_head == NULL) {
+        q->tail = NULL;
+    }
+    q->size--;
+    return it; 
+    
+}
+
+/**
+ * Gets the item at the front of the queue without removing it
+ * Assumes that the queue is not empty
+ */
+Item QueueFront(Queue q) {
+	assert(q->size > 0);
+
+	return q->head->item;
+}
+
+/**
+ * Gets the size of the given queue
+ */
+int QueueSize(Queue q) {
+	return q->size;
+}
+
+/**
+ * Returns true if the queue is empty, and false otherwise
+ */
+bool QueueIsEmpty(Queue q) {
+	return q->size == 0;
+}
+
+/**
+ * Prints the queue to the given file with items space-separated
+ */
+void QueueDump(Queue q, FILE *fp) {
+	for (Node curr = q->head; curr != NULL; curr = curr->next) {
+		fprintf(fp, "%d ", curr->item);
+	}
+	fprintf(fp, "\n");
+}
+
+
+
