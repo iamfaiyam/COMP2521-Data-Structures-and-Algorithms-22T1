@@ -1,0 +1,58 @@
+
+NOTE:
+- Your time complexities should be expressed in big-O notation and be in
+  terms of n, where n is the number of people who  have  been  added  to
+  Friendbook.
+
+===============
+  FbUnfriend
+===============
+
+- Worst case time complexity: O(log(n))
+
+- Explanation: The time complexity of nameToId is log(n) because it is used
+to search through an AVL tree. Since the 2d array here has time complexity of 
+O(1), we this get the time complexity of this function to be: 
+O(2log(n) + 1) = O(log(n)).
+
+===============
+FbMutualFriends
+===============
+
+- Worst case time complexity: O(n^2)
+
+- Explanation: The function declares and initialises a List called ListNew 
+function, which has the worst case time complexity of O(1). The initialisation 
+of an integer has a time complexity of O(1). The for loop following it runs
+a total of n times. Inside the loop there is a pointer assigned to a string, 
+making it O(1). The function FbIsFriend is O(1) and the function ListAppend
+has realloc with O(n). Thus, the time complexity for the loop becomes O(n^2).
+Therefore, the worst case time complexity is O(n^2).
+
+===============
+ FbFriendRecs1
+===============
+
+- Worst case time complexity: O(n^2 * log(n))
+
+- Explanation: This function declares and initialises an integer using 
+NameToId which has MapContains using doContains resulting in O(log(n)) times
+complexity. Next, MapGet in NameToId has time complexity of O(log(n)). Further-
+more, the function declares and initialises another integer and prints which 
+has time complexity of O(1). Then there is a for loop which runs at n - 2 
+amount of times and inside this loop contains another loop which runs n(n - 2) 
+times calling FbIsFriend O(1). FbMutualFriends has O(n^2) and ListSize has 
+O(1) time complexity. The if statement and prints a statement which has time
+complexity of O(1). Therefore the time complexity for the for loop is 
+O(n^2 * log(n)). 
+Therefore, the time complexity becomes O(n^2 * log(n)). 
+
+
+
+
+
+
+
+
+
+
