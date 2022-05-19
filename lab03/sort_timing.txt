@@ -1,0 +1,59 @@
+Name: Faiyam Islam (z5258151)
+Lab 03, Task 1
+Description: Comparing average time of sortIntList and sort programs
+of various input sizes through random, sorted and reverse order. 
+
+
+Input	Initial	Number	AvgTime		    AvgTime
+Size	Order	of Runs	for sortIntList	for sort
+
+10000	random	5	    0.130sec		0.000sec
+10000	sorted	5	    0.140sec		0.004sec
+10000	reverse	5	    0.000sec		0.000sec
+
+20000	random	5	    0.616sec		0.006sec
+20000	sorted	5	    0.558sec		0.008sec
+20000	reverse	5	    0.000sec		0.006sec
+
+40000	random	5	    3.206sec		0.026sec
+40000	sorted	5	    2.204sec		0.012sec
+40000	reverse	5	    0.002sec		0.010sec
+
+50000   random  5       6.208sec        0.034sec  
+50000   sorted  5       3.458sec        0.018sec
+50000   reverse 5       0.020sec        0.020sec
+
+80000   random  5       22.304sec       0.046sec
+80000   sorted  5        8.904sec       0.022sec
+80000   reverse 5        0.036sec       0.034sec
+
+100000  random  5       39.402sec       0.070sec
+100000  sorted  5       13.856sec       0.044sec
+100000  reverse 5        0.042sec       0.042sec
+
+Explanation: 
+
+A pattern we observe from the average times between sortIntList and sort is that 
+sortIntList consumes more time for execution compared to sort. The order of the
+numbers played a significant role as it took longer for randomly sorted numbers
+to be executed compared to sorted and reverse for sortIntList. 
+
+The function for IntListSortedCopy contains a while loop which takes in the 
+condition that if the current node is not NULL, the IntListInsertInOrder
+function will create a copy of the linked list. This program has a time 
+complexity of O(n). As the input size increased, so does the average time 
+for sortIntList, especially for random input which increased dramatically
+compared to sorted and reverse order. 
+
+The reason why randomly ordered inputs contained a greater time was because the 
+program needed to sort all the numbers back in order which took longer time.
+However, interestingly sorted order took 
+more time compared to reverse. This is because the IntListSortedCopy function 
+I coded required moving through the linked list until the user is at the end 
+of the list or have reached the correct spot to insert the node. However, for 
+reverse order the program is not required to move through the linked list since
+each new node can be inserted as the head of the list. 
+
+Thus, reverse contains a quicker time than sorted. This is the same case for 
+the times we achieved for sorted.
+
